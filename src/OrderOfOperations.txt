@@ -1,0 +1,49 @@
+Merhaba burada redux için yapılan işlemleri adım adım görebilirsin...
+
+1-) Öncelikle src altında redux klasörü oluşturuldu. redux içerisinde counter klasörü ve store.js dosyası oluşturuldu.
+2-) counter klasörü içeirisnde counterSlice.js doyası oluşturuldu...
+3-) src altında component klasörü oluşturuldu ve içerisinde Counter.js dosyası oluşturuldu...
+4-) store.js içerisinde aşağıdaki kod yazıldı.. burada store configureStore methodundan oluşturuluyor...
+
+    import { configureStore } from "@reduxjs/toolkit";
+    import counterReducer from "./counter/counterSlice";
+
+    export const store = configureStore({
+        reducer:{
+            counter:counterReducer,
+        }
+    });
+
+5-) index.js (main component) dosyasından componentleri sarmak için öncelikle 
+oluşturduğumuz store dosyası ile Provider ı import ettik. ve App compomenti sardık içerisine store değerini gönderdik.
+
+    import { store } from "./redux/store";
+    import { Provider } from "react-redux";
+    ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+        <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
+    );
+
+6-) daha sonra oluşturduğumuz Counter.js içerisini aşağıdaki kodlar ile dolduralım...
+
+    import React from 'react';
+    import {useSelector} from 'react-redux';
+
+    const Counter = () => {
+
+        const countValue=useSelector((state) => state.counter.value); //buradaki counter aslında store.js reducer içerindeki counter.
+        console.log("countvalue",countValue);
+
+        return (
+            <div>
+                <h1>h</h1>
+            </div>
+        )
+    }
+
+    export default Counter;
+    
